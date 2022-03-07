@@ -1,0 +1,154 @@
+# The behavior of RuboCop can be controlled via the .rubocop.yml
+# configuration file. It makes it possible to enable/disable
+# certain cops (checks) and to alter their behavior if they accept
+# any parameters. The file can be placed either in your home
+# directory or in some project directory.
+#
+# RuboCop will start looking for the configuration file in the directory
+# where the inspected file is and continue its way up to the root directory.
+#
+# See https://docs.rubocop.org/rubocop/configuration
+require:
+  - rubocop/cop/internal_affairs
+  - rubocop-performance
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - "vendor/**/*"
+    - "spec/fixtures/**/*"
+    - "tmp/**/*"
+    - ".git/**/*"
+    - "bin/*"
+    - "node_modules/**/*"
+    - "db/**/*"
+    - "config/initializers/**/*"
+    - "config/environments/**/*"
+  TargetRubyVersion: 3.1.0
+
+Naming/PredicateName:
+  # Method define macros for dynamically generated method.
+  MethodDefinitionMacros:
+    - define_method
+    - define_singleton_method
+    - def_node_matcher
+    - def_node_search
+
+Style/AccessorGrouping:
+  Exclude:
+    - lib/rubocop/formatter/base_formatter.rb
+    - lib/rubocop/cop/offense.rb
+
+Style/FormatStringToken:
+  # Because we parse a lot of source codes from strings. Percent arrays
+  # look like unannotated format string tokens to this cop.
+  Exclude:
+    - spec/**/*
+
+Style/IpAddresses:
+  # The test for this cop includes strings that would cause offenses
+  Exclude:
+    - spec/rubocop/cop/style/ip_addresses_spec.rb
+
+Layout/EndOfLine:
+  EnforcedStyle: lf
+
+Layout/ClassStructure:
+  Enabled: true
+  Categories:
+    module_inclusion:
+      - include
+      - prepend
+      - extend
+  ExpectedOrder:
+    - module_inclusion
+    - constants
+    - public_class_methods
+    - initializer
+    - instance_methods
+    - protected_methods
+    - private_methods
+
+# Trailing white space is meaningful in code examples
+Layout/TrailingWhitespace:
+  AllowInHeredoc: true
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - "spec/**/*.rb"
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle:
+    - key
+    - table
+  EnforcedColonStyle:
+    - key
+    - table
+
+Layout/LineLength:
+  Max: 120
+  IgnoredPatterns:
+    - !ruby/regexp /\A +(it|describe|context|shared_examples|include_examples|it_behaves_like) ["']/
+
+Lint/InterpolationCheck:
+  Exclude:
+    - "spec/**/*.rb"
+
+Lint/UselessAccessModifier:
+  MethodCreatingMethods:
+    - "def_matcher"
+    - "def_node_matcher"
+
+Lint/BooleanSymbol:
+  Enabled: false
+
+Metrics/BlockLength:
+  Exclude:
+    - "Rakefile"
+    - "**/*.rake"
+    - "spec/**/*.rb"
+    - "**/*.gemspec"
+    - "config/routes.rb"
+
+Metrics/ClassLength:
+  Exclude:
+    - lib/rubocop/config_obsoletion.rb
+
+Metrics/ModuleLength:
+  Exclude:
+    - "spec/**/*.rb"
+
+Metrics/MethodLength:
+  Enabled: false
+
+RSpec/FilePath:
+  Exclude:
+    - spec/rubocop/formatter/junit_formatter_spec.rb
+
+RSpec/MessageSpies:
+  EnforcedStyle: receive
+
+RSpec/NestedGroups:
+  Max: 7
+
+RSpec/ExampleLength:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
