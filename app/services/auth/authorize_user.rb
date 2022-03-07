@@ -9,15 +9,14 @@ module Auth
     def call
       decode = JsonWebToken.decode(token)
 
-      User.find(decode['sub'])
-    rescue ActiveRecord::NotFound
+      User.find(decode['sub']) if decode
+    rescue ActiveRecord::RecordNotFound
       false
     end
 
     private
 
     def token
-      puts request.headers.fetch('Authorization', ' ')
       request.headers.fetch('Authorization', ' ').split.last
     end
   end

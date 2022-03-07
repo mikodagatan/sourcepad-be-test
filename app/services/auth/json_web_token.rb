@@ -6,6 +6,8 @@ module Auth
         payload.merge(exp: expiration),
         ENV['DEVICE_JWT_SECRET_KEY']
       )
+    rescue StandardError
+      false
     end
 
     def self.decode(token)
@@ -13,6 +15,8 @@ module Auth
         token,
         ENV['DEVICE_JWT_SECRET_KEY']
       ).first
+    rescue StandardError
+      false
     end
   end
 end
