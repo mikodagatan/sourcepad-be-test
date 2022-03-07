@@ -1,24 +1,24 @@
-# README
+# SourcePad Rails BE Exam
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## How to start
 
-Things you may want to cover:
+```
+  bundle
+  docker-compose up
+  rails s
 
-* Ruby version
+  rspec # spec tests
+```
 
-* System dependencies
+## Why does Docker only have DB?
 
-* Configuration
+Dockerized Rails is quite difficult for onboarding based on experience. I had a lot of experience with creating and joining a Dockerized Rails app, and I don't mind the hassles. But, I think I got to make it a habit to use DB-dockerized Rails as some people mind the difficulty.
 
-* Database creation
+## Tech Stack
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- Rails 7
+- Ruby 3.1.0
+- Blueprinter
+- Devise
+- DeviseJWT
+- RSpec
